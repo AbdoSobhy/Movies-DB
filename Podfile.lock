@@ -1,5 +1,10 @@
 PODS:
   - Alamofire (5.4.1)
+  - Cosmos (23.0.0)
+  - Keys (1.0.1)
+  - Kingfisher (5.15.8):
+    - Kingfisher/Core (= 5.15.8)
+  - Kingfisher/Core (5.15.8)
   - RxCocoa (5.1.1):
     - RxRelay (~> 5)
     - RxSwift (~> 5)
@@ -9,22 +14,34 @@ PODS:
 
 DEPENDENCIES:
   - Alamofire (~> 5.0)
+  - Cosmos (~> 23.0)
+  - Keys (from `Pods/CocoaPodsKeys`)
+  - Kingfisher (~> 5.0)
   - RxCocoa (~> 5.1.0)
   - RxSwift (~> 5.1.0)
 
 SPEC REPOS:
   trunk:
     - Alamofire
+    - Cosmos
+    - Kingfisher
     - RxCocoa
     - RxRelay
     - RxSwift
 
+EXTERNAL SOURCES:
+  Keys:
+    :path: Pods/CocoaPodsKeys
+
 SPEC CHECKSUMS:
   Alamofire: 2291f7d21ca607c491dd17642e5d40fdcda0e65c
+  Cosmos: b5c6a9a637e28a061b54c8f8b1d8529d7d4db73f
+  Keys: a576f4c9c1c641ca913a959a9c62ed3f215a8de9
+  Kingfisher: a3c03d702433fa6cfedabb2bddbe076fb8f2e902
   RxCocoa: 32065309a38d29b5b0db858819b5bf9ef038b601
   RxRelay: d77f7d771495f43c556cbc43eebd1bb54d01e8e9
   RxSwift: 81470a2074fa8780320ea5fe4102807cb7118178
 
-PODFILE CHECKSUM: 54109c4becc38d200ba6dedb2e1ec03a98656130
+PODFILE CHECKSUM: 67f9299b6f27a2e787aaacc9087482af681e1bbc
 
 COCOAPODS: 1.10.1

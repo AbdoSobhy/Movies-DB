@@ -7,18 +7,33 @@
 //
 
 import Foundation
+import RxSwift
 
 class MoviesPresenterImpl: MoviesPresenter, MoviesInteractorOutput {
     
     weak var view: MoviesView?
     private let interactor: MoviesInteractorInput
     private let router: MoviesRouter
-    
+    private var movies = PublishSubject<[MovieResult]>()
+    var moviesObserver: Observable<[MovieResult]>{return movies}
     
     init(view: MoviesView, interactor: MoviesInteractorInput, router: MoviesRouter) {
         self.view = view
         self.interactor = interactor
         self.router = router
     }
+    
+    func viewDidLoad() {
+        interactor.getMovies(page: 1)
+    }
+    
+    func moviesFetchedSuccessfully(with movie: TopRated) {
+        self.movies.onNext(movie.results)
+    }
+    
+    func moviesFetchedError(with error: ErrorHandler) {
+        print(error.errorObject.message)
+    }
+
     
 }

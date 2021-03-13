@@ -16,7 +16,7 @@ class CustomInterceptor: RequestInterceptor {
         //        if let urlString = urlRequest.url?.absoluteString, urlString.contains("movie/top_rated"){
         //            UserDefaults.standard.set("90fd0c6e987f62a4def180feaf9edd9", forKey: "api_key")
         //        }
-        //        completion(.success(urlRequest))
+                completion(.success(urlRequest))
     }
     
     func retry(_ request: Request, for session: Session, dueTo error: Error, completion: @escaping (RetryResult) -> Void) {

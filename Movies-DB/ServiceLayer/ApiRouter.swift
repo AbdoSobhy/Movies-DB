@@ -7,36 +7,40 @@
 
 import Foundation
 import Alamofire
+import Keys
 
 enum ApiRouter: URLRequestConvertible {
     enum Constants{
-//        static var baseUrl = "https://"//development
-        static var baseUrl = "https://"//production
+        static let key = MoviesDBKeys()
+        static var baseUrl = "https://api.themoviedb.org/3/"
+        static let api_token = key.iMDBMovieApiKey
     }
     
-    case products(page : String, limit : Int)
+    case topRates(page : Int)
     
     var url : URL {
         switch self {
-        case .products:
-            return URL(string: "\(Constants.baseUrl)products")!
+        case .topRates:
+            return URL(string: "\(Constants.baseUrl)movie/top_rated")!
         }
 
     }
     
     var method : HTTPMethod {
         switch self {
-        case .products:
+        case .topRates:
             return .get
         }
     }
     
     var parameters : [String:Any]{
         switch self {
-        default:
-            return [:]
+        case .topRates(let page):
+            return ["api_key": Constants.api_token,
+                    "page":page]
         }
     }
+    
     var headers : HTTPHeaders {
         switch self {
         default:

@@ -9,7 +9,17 @@
 import Foundation
 
 class MoviesInteractor: MoviesInteractorInput {
-    var presenter: MoviesInteractorOutput?
+    internal var presenter: MoviesInteractorOutput?
+    private let moviesRepo = MoviesRepoImpl()
     
-    
+    func getMovies(page: Int) {
+        moviesRepo.getTopRatedMovies(page: page) { [weak self] response in
+            switch response {
+            case .success(let topRated):
+                self?.presenter?.moviesFetchedSuccessfully(with: topRated)
+            case .failure(let error):
+                self?.presenter?.moviesFetchedError(with: error)
+            }
+        }
+    }
 }

@@ -7,7 +7,15 @@ target 'Movies-DB' do
 
   # Pods for Movies-DB
 pod 'Alamofire', '~> 5.0'
+pod 'Kingfisher', '~> 5.0'
 pod 'RxSwift', '~> 5.1.0'
 pod 'RxCocoa', '~> 5.1.0'
+pod 'Cosmos', '~> 23.0'
 
 end
+
+plugin 'cocoapods-keys', {
+  :project => "Movies-DB",
+  :keys => [
+    "IMDBMovieApiKey"
+  ]}

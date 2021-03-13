@@ -26,7 +26,7 @@ class MoviesRouterImpl: MoviesRouter {
     }
     
     static var storyboard: UIStoryboard {
-        return UIStoryboard(name: "", bundle: nil)
+        return UIStoryboard(name: "Movie", bundle: nil)
     }
     
 }
