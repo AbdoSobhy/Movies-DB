@@ -58,8 +58,14 @@ struct ResultViewModel{
     
     let dateFormater: DateFormatter = {
         let dateFormater = DateFormatter()
-        dateFormater.dateFormat = "MMM d, yyyy"
+        dateFormater.dateFormat = "yyyy-MM-dd"
         return dateFormater
+    }()
+    
+    let dateFormatPrint: DateFormatter = {
+        let dateFormatterPrint = DateFormatter()
+        dateFormatterPrint.dateFormat = "MMM dd,yyyy"
+        return dateFormatterPrint
     }()
 
     
@@ -68,7 +74,9 @@ struct ResultViewModel{
         self.movieTitle = movieResult.title
         self.movieRate = (movieResult.voteAverage) / 2
         self.movieRateCount = "( \(movieResult.voteCount) )"
-        self.movieReleaseDate = "\(String(describing: dateFormater.date(from: movieResult.releaseDate)) ) - \(movieResult.originalLanguage)"
+        let date = dateFormater.date(from: movieResult.releaseDate)
+        self.movieReleaseDate = "\(dateFormatPrint.string(from: date ?? Date())) - \(movieResult.originalLanguage)"
+        print(self.movieReleaseDate)
         self.movieOverview = movieResult.overview
     }
 }

@@ -20,6 +20,7 @@ class MovieTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+        hideViews()
     }
     
     func configure(cell: ResultViewModel){
@@ -29,6 +30,20 @@ class MovieTableViewCell: UITableViewCell {
         movieRateCount.text = cell.movieRateCount
         movieReleaseDate.text = cell.movieReleaseDate
         movieOverview.text = cell.movieOverview
+        animateView()
+    }
+    func hideViews(){
+        let transform = CGAffineTransform(scaleX: 0, y: 0)
+        movieImage.transform = transform
+        movieTitle.transform = transform
+    }
+    func animateView() {
+        DispatchQueue.main.async {
+            UIView.animate(withDuration: 0.2) {
+                self.movieImage.transform = .identity
+                self.movieTitle.transform = .identity
+            }
+        }
     }
 
 }
