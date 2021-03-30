@@ -27,6 +27,10 @@ class MoviesPresenterImpl: MoviesPresenter, MoviesInteractorOutput {
         interactor.getMovies(page: 1)
     }
     
+    func didSelectRow(at: Int, with movie: MovieResult) {
+        router.navigateToDetailsScreen(movieId: movie.id)
+    }
+    
     func moviesFetchedSuccessfully(with movie: TopRated) {
         self.movies.onNext(movie.results)
     }

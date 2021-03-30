@@ -18,7 +18,7 @@ class MoviesViewController: UIViewController, MoviesView {
     
     @IBOutlet weak var titleLbl: UILabel!
     @IBOutlet weak var moviesTableView: UITableView!
-    
+        
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
@@ -31,14 +31,18 @@ class MoviesViewController: UIViewController, MoviesView {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         setNeedsStatusBarAppearanceUpdate()
+        self.navigationController?.navigationBar.isHidden = true
         animateViews()
     }
-    
-    override var preferredStatusBarStyle: UIStatusBarStyle { .lightContent }
     
     func bindTableView(){
         self.presenter?.moviesObserver.bind(to: moviesTableView.rx.items(cellIdentifier: "MovieTableViewCell", cellType: MovieTableViewCell.self)) {(row, movie, cell) in
             cell.configure(cell: ResultViewModel(movieResult: movie))
+        }.disposed(by: disposeBag)
+        
+        // select item
+        Observable.zip(moviesTableView.rx.itemSelected, moviesTableView.rx.modelSelected(MovieResult.self)).bind { [weak self] indexPath, movie in
+            self?.presenter?.didSelectRow(at: indexPath.row, with: movie)
         }.disposed(by: disposeBag)
     }
     

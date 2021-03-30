@@ -76,7 +76,6 @@ struct ResultViewModel{
         self.movieRateCount = "( \(movieResult.voteCount) )"
         let date = dateFormater.date(from: movieResult.releaseDate)
         self.movieReleaseDate = "\(dateFormatPrint.string(from: date ?? Date())) - \(movieResult.originalLanguage)"
-        print(self.movieReleaseDate)
         self.movieOverview = movieResult.overview
     }
 }

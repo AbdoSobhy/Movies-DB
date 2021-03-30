@@ -8,6 +8,7 @@
 
 
 import Foundation
+import RxSwift
 
 protocol MovieDetailsView: AnyObject {
     var presenter: MovieDetailsPresenter? { get set }
@@ -16,16 +17,19 @@ protocol MovieDetailsView: AnyObject {
 
 protocol MovieDetailsPresenter: AnyObject {
     var view: MovieDetailsView? { get set }
+    var movieDetails: PublishSubject<MovieDetailsViewModel> {get}
+    func viewDidLoad()
 
 }
 
 protocol MovieDetailsInteractorInput {
     var presenter: MovieDetailsInteractorOutput? { get set }
-    
+    func getMovieDetails(movieId: Int)
 }
 
 protocol MovieDetailsInteractorOutput {
-    
+    func moviesFetchedSuccessfully(with movieDetails: MovieDetails)
+    func moviesFetchedError(with error: ErrorHandler)
 }
 
 protocol MovieDetailsRouter {

@@ -10,7 +10,7 @@
 import Foundation
 import RxSwift
 
-protocol MoviesView: AnyObject {
+protocol MoviesView: UIViewController {
     var presenter: MoviesPresenter? { get set }
 
 }
@@ -19,6 +19,7 @@ protocol MoviesPresenter: AnyObject {
     var view: MoviesView? { get set }
     var moviesObserver: Observable<[MovieResult]> {get}
     func viewDidLoad()
+    func didSelectRow(at: Int, with: MovieResult)
 
 }
 
@@ -34,7 +35,7 @@ protocol MoviesInteractorOutput {
 }
 
 protocol MoviesRouter {
-
+    func navigateToDetailsScreen(movieId: Int)
 }
 
 

@@ -29,4 +29,17 @@ class MoviesRouterImpl: MoviesRouter {
         return UIStoryboard(name: "Movie", bundle: nil)
     }
     
+    func navigateToDetailsScreen(movieId: Int){
+        let viewController = MoviesRouterImpl.storyboard.instantiateViewController(withIdentifier: "MovieDetailsViewController")
+        if let viewController = viewController as? MovieDetailsViewController {
+            let interactor = MovieDetailsInteractor()
+            let router = MovieDetailsRouterImpl()
+            let presenter = MovieDetailsPresenterImpl(view: viewController, interactor: interactor, router: router, movieId: movieId)
+            viewController.presenter = presenter
+            interactor.presenter = presenter
+            router.view = viewController
+        }
+        self.view?.navigationController?.pushViewController(viewController, animated: true)
+    }
+
 }

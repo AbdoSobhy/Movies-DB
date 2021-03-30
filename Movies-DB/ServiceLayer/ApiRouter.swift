@@ -16,19 +16,22 @@ enum ApiRouter: URLRequestConvertible {
         static let api_token = key.iMDBMovieApiKey
     }
     
-    case topRates(page : Int)
+    case topRates(page: Int)
+    case movieDetails(movieId: Int)
     
     var url : URL {
         switch self {
         case .topRates:
             return URL(string: "\(Constants.baseUrl)movie/top_rated")!
+        case .movieDetails(let movieId):
+            return URL(string: "\(Constants.baseUrl)movie/\(movieId)")!
         }
 
     }
     
     var method : HTTPMethod {
         switch self {
-        case .topRates:
+        case .topRates, .movieDetails:
             return .get
         }
     }
@@ -38,6 +41,8 @@ enum ApiRouter: URLRequestConvertible {
         case .topRates(let page):
             return ["api_key": Constants.api_token,
                     "page":page]
+        case .movieDetails:
+            return ["api_key": Constants.api_token]
         }
     }
     

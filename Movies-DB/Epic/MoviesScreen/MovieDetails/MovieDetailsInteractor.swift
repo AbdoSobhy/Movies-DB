@@ -10,6 +10,16 @@ import Foundation
 
 class MovieDetailsInteractor: MovieDetailsInteractorInput {
     var presenter: MovieDetailsInteractorOutput?
-    
-    
+    private let moviesRepo = MoviesRepoImpl()
+
+    func getMovieDetails(movieId: Int) {
+        moviesRepo.getMovieDetails(movieId: movieId) { [weak self] response in
+            switch response {
+            case .success(let movieDetails):
+                self?.presenter?.moviesFetchedSuccessfully(with: movieDetails)
+            case .failure(let errorModel):
+                self?.presenter?.moviesFetchedError(with: errorModel)
+            }
+        }
+    }
 }
